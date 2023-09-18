@@ -5,9 +5,9 @@ services:
       lukx19/gaussian_splatting:23_09_06_0
     container_name:
       gaussian_splatting-cntr
-    build:
-      context: ..
-      dockerfile: .devcontainer/Dockerfile
+    # build:
+    #   context: ..
+    #   dockerfile: .devcontainer/Dockerfile
     volumes:
       - ..:/home/user/workspace/:cached
       - $HOME/.Xauthority:/home/user/.Xauthority
