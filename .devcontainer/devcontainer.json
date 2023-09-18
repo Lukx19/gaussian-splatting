@@ -1,0 +1,25 @@
+{
+    "name": "gaussian_splatting",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "gaussian_splatting",
+    "workspaceFolder": "/home/user/workspace/",
+    "shutdownAction": "stopCompose",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+            "076923.python-image-preview",
+            "ms-python.python",
+            "ms-python.vscode-pylance",
+            "njpwerner.autodocstring",
+            "Percy.vscode-numpy-viewer",
+            "eamodio.gitlens",
+            "mhutchie.git-graph",
+            "ms-azuretools.vscode-docker",
+            "vivaxy.vscode-conventional-commits",
+            "cheshirekow.cmake-format",
+            "ms-vscode.cpptools",
+            "ms-vscode.cmake-tools"
+        ]
+      }
+    }
+}

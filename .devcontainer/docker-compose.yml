@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  gaussian_splatting:
+    image:
+      lukx19/gaussian_splatting:23_09_06_0
+    container_name:
+      gaussian_splatting-cntr
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/home/user/workspace/:cached
+      - $HOME/.Xauthority:/home/user/.Xauthority
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    command: bash
+    shm_size: 16gb
+    environment:
+    # Unfortunately this is overriden by vscode. VScode will push local display from SSH host and not docker host. We hardcode DISPLAY into .bashrc
+      - DISPLAY=$DISPLAY
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, utility, graphics]
+    tty: true
+    # stdin_open: true
