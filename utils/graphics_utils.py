@@ -3,7 +3,7 @@
 # GRAPHDECO research group, https://team.inria.fr/graphdeco
 # All rights reserved.
 #
-# This software is free for non-commercial, research and evaluation use 
+# This software is free for non-commercial, research and evaluation use
 # under the terms of the LICENSE.md file.
 #
 # For inquiries contact  george.drettakis@inria.fr
@@ -56,6 +56,30 @@ def getProjectionMatrix(znear, zfar, fovX, fovY):
     bottom = -top
     right = tanHalfFovX * znear
     left = -right
+
+    P = torch.zeros(4, 4)
+
+    z_sign = 1.0
+
+    P[0, 0] = 2.0 * znear / (right - left)
+    P[1, 1] = 2.0 * znear / (top - bottom)
+    P[0, 2] = (right + left) / (right - left)
+    P[1, 2] = (top + bottom) / (top - bottom)
+    P[3, 2] = z_sign
+    P[2, 2] = z_sign * zfar / (zfar - znear)
+    P[2, 3] = -(zfar * znear) / (zfar - znear)
+    return P
+
+def getProjectionMatrixOffset(znear, zfar, fovX, fovY, offsetX, offsetY, width, height):
+    tanHalfFovY = math.tan((fovY / 2))
+    tanHalfFovX = math.tan((fovX / 2))
+    offset_middle_X = width / 2 - offsetX
+    offset_middle_Y = height / 2 - offsetY
+    bottom = -tanHalfFovY * znear + offset_middle_Y
+    top = tanHalfFovY * znear + offset_middle_Y
+
+    left = -tanHalfFovX * znear + offset_middle_X
+    right =  tanHalfFovX * znear + offset_middle_X
 
     P = torch.zeros(4, 4)
 
