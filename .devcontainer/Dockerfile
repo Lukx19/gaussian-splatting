@@ -9,7 +9,9 @@ RUN apt update && apt install -y tzdata
 RUN apt update \
     && apt install -y \
     nano git wget tmux htop nvtop ninja-build cmake build-essential g++\
-    libglew-dev libassimp-dev libboost-all-dev libgtk-3-dev libopencv-dev libglfw3-dev libavdevice-dev libavcodec-dev libeigen3-dev libxxf86vm-dev libembree-dev \
+    libglew-dev libassimp-dev libboost-all-dev libgtk-3-dev \
+    libopencv-dev libglfw3-dev libavdevice-dev libavcodec-dev \ 
+    libeigen3-dev libxxf86vm-dev libembree-dev imagemagick\
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -74,9 +76,7 @@ RUN conda env create --file environment.yml
 
 RUN conda init bash \
     && exec bash \
-    && conda activate gaussian_splatting \
-    && conda install -c conda-forge -y colmap tensorboard \
-    && pip install -y torch-tb-profiler
+    && conda activate gaussian_splatting
 
 # Build the viewer now.
 # COPY SIBR_viewers /home/user/workspace/SIBR_viewers

@@ -13,6 +13,9 @@ dependencies:
   - torchaudio=2.0.0
   - torchvision=0.15.0
   - tqdm
+  - colmap
+  - tensorboard
   - pip:
     - submodules/diff-gaussian-rasterization
     - submodules/simple-knn
+    - torch-tb-profiler
